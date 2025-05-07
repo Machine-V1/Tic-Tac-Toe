@@ -26,11 +26,15 @@ section{
 .jogo-da-velha div{
     background-color: white;
     cursor: pointer;
-
+    padding: 20px;
 }
 .jogo-da-velha div:hover{
     opacity: 90%;
 }
 .jogo-da-velha div:active{
     background-color: rgb(255, 189, 165);
+}
+.jogo-da-velha img{
+    width: 100%;
+    height: 100%;
 }
