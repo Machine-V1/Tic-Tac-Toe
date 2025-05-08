@@ -15,8 +15,8 @@ section{
 }
 .jogo-da-velha{
     background-color: black;
-    height: 500px;
-    width: 500px;
+    height: 550px;
+    width: 550px;
     display: grid;
     grid-template-columns: repeat(3,1fr);
     grid-template-rows: repeat(3,1fr);
@@ -24,6 +24,9 @@ section{
     
 }
 .jogo-da-velha div{
+    display: flex;
+    align-content: center;
+    justify-content: center;
     background-color: white;
     cursor: pointer;
     padding: 20px;
