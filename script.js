@@ -51,7 +51,7 @@ function checarVencedor() {
   } else if (checkColuna()) {
     checkVencedor = checkColuna();
   }
-  checkColuna();
+  checkColuna(); // ?
   console.log(checkVencedor);
 
   if (checkVencedor == "O") {
@@ -107,12 +107,32 @@ function checkColuna() {
 function checkDiagonal() {
   // 😥
   let checkDiagonalVetor = [];
-  let checkDiagonalVetorString = "";
-  (function () {
+  
+
+  
+  if(checkEsquerda() == "OOO" || checkEsquerda() == "XXX"){
+    
+  }else if(checkDireita() == "OOO" || checkDireita() == "XXX"){
+
+  }else{
+
+  }
+
+
+  function checkEsquerda() {
     for (let i = 0; i < 3; i++) {
       // diagonal esquerda -> direita
-      vetor.push(mapeamento[i][i]);
+      checkDiagonalVetor.push(mapeamento[i][i]);
       // fazer aqui pra retornar o falor
+    
     }
-  })();
+    return checkDiagonalVetor.reduce((total,valor)=>total+=valor)
+  }
+  function checkDireita() {
+    for (let i = 0; i < 3; i++) {
+      // aqui acessa a linha
+      checkDiagonalVetor.push(mapeamento[i][2 - i]);
+    }
+    return checkDiagonalVetor
+  }
 }
