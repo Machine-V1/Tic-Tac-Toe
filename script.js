@@ -149,3 +149,4 @@ function checkDiagonal() {
     checkDiagonalVetor = [];
   }
 }
+// pensar em outra forma de fazer isso usando every
