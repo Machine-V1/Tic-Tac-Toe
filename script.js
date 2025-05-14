@@ -1,6 +1,7 @@
 const jogoDiv = document.getElementById("jogo-div");
 const celulas = document.getElementsByClassName("celula");
 
+// adiciona um evento a todas as celulas
 Array.from(celulas).forEach((valor) => {
   valor.addEventListener("click", (event) => {
     clickCelula(event.target);
@@ -8,12 +9,14 @@ Array.from(celulas).forEach((valor) => {
 });
 
 let ehbola = true;
-let vencedor = { venceu: false, quemVenceu: "" };
+let vencedor = { venceu: false, quemVenceu: "" }; // objeto do vencedor
+
 let mapeamento = [
   ["vazio", "vazio", "vazio"],
   ["vazio", "vazio", "vazio"],
   ["vazio", "vazio", "vazio"],
 ];
+
 function preencherCelula(img, linha, coluna) {
   if (ehbola) {
     img.src = "circle_icon.svg";
@@ -38,20 +41,21 @@ function clickCelula(divClicada) {
     const img = document.createElement("img");
     preencherCelula(img, linha, coluna);
     divClicada.appendChild(img);
-    console.log(mapeamento);
     checarVencedor();
   }
 }
 
 function checarVencedor() {
-  // desenvolver a logica obs: nao esquecer os metodos de arrays
+  
   let checkVencedor = null;
   if (checkLinha()) {
     checkVencedor = checkLinha();
   } else if (checkColuna()) {
     checkVencedor = checkColuna();
+  } else if (checkDiagonal()) {
+    checkVencedor = checkDiagonal();
   }
-  checkColuna(); // ?
+
   console.log(checkVencedor);
 
   if (checkVencedor == "O") {
@@ -79,11 +83,6 @@ function checkLinha() {
   }
   return null;
 }
-// let mapeamento = [
-//   ["O", "O", "X"],
-//   ["X", "X", "X"],
-//   ["O", "X", "O"],
-// ];
 function checkColuna() {
   let checkColunaVetor = [];
   let checkColunaString;
@@ -107,32 +106,46 @@ function checkColuna() {
 function checkDiagonal() {
   // 😥
   let checkDiagonalVetor = [];
-  
 
-  
-  if(checkEsquerda() == "OOO" || checkEsquerda() == "XXX"){
-    
-  }else if(checkDireita() == "OOO" || checkDireita() == "XXX"){
-
-  }else{
-
+  if (checkEsquerda() == "OOO") {
+    return "O";
+  } else {
+    resetarVetor();
   }
-
+  if (checkEsquerda() == "XXX") {
+    return "X";
+  } else {
+    resetarVetor();
+  }
+  if (checkDireita() == "OOO") {
+    return "O";
+  } else {
+    resetarVetor();
+  }
+  if (checkDireita() == "XXX") {
+    return "X";
+  } else {
+    resetarVetor();
+  }
 
   function checkEsquerda() {
     for (let i = 0; i < 3; i++) {
       // diagonal esquerda -> direita
       checkDiagonalVetor.push(mapeamento[i][i]);
-      // fazer aqui pra retornar o falor
-    
+      
     }
-    return checkDiagonalVetor.reduce((total,valor)=>total+=valor)
+    
+    return checkDiagonalVetor.reduce((total, valor) => (total += valor));
   }
   function checkDireita() {
     for (let i = 0; i < 3; i++) {
-      // aqui acessa a linha
+      // diagonal direita -> esquerda
       checkDiagonalVetor.push(mapeamento[i][2 - i]);
     }
-    return checkDiagonalVetor
+    
+    return checkDiagonalVetor.reduce((total, valor) => (total += valor));
+  }
+  function resetarVetor(){
+    checkDiagonalVetor = [];
   }
 }
